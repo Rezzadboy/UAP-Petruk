@@ -45,7 +45,14 @@ struct Tampilan{
         }
     }
 
-    void Enqueue(){
+    void Enqueue(string namaobat){
+        if(data1 == jmlh){
+            cout<<"Penuh";
+
+        }else{
+            data1++;
+            obat1.push(namaobat);
+        }
 
     }
 
@@ -206,6 +213,13 @@ void pembeli(string name){
         daftar();
         cout<<"Masukkan Pilihan(beli/batal/exit): ";
         cin>> pilih;
+        if (pilih == "beli")
+        {
+           cout << "masukkan obat yang anda pesan\n";
+           cin >> obat;
+           menu.Push(obat);
+        }
+        
 
 
     }while(pilih != "exit");
