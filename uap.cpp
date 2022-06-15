@@ -6,19 +6,20 @@
 #include <time.h>
 #include <stack>
 #include <queue>
-#define jmlh 5;
+#define jmlh 20
 using namespace std;
 
 struct Tampilan{
     stack<string> obat;
-    int data = 0;
-
+    queue<string> obat1;
+    int data = 0, data1 = 0;
+    
     void clear(){
         system("cls");
     }
 
     void Push(string medic){
-        if(data == 5){
+        if(data == jmlh){
             cout<<"Penuh";
 
         }else{
@@ -27,12 +28,25 @@ struct Tampilan{
         }
     }
 
-
+    void Pop(){
+        if(!obat.empty()){
+            data--;
+            obat.pop();
+        
+        }else if (data == 0){
+            cout<<"Tidak ada Daftar Obat";
+        }
+    }
+    
     void cetak(stack <string> medkit){
         while(!medkit.empty()){
             cout<< medkit.top()<<"\n";
             medkit.pop();
         }
+    }
+
+    void Enqueue(){
+
     }
 
 
@@ -43,8 +57,11 @@ void Home();
 void kursor();
 void gotoxy();
 void login();
-void admin();
-
+void admin(string username);
+void pembeli(string name);
+void header();
+void daftar();
+int keluar();
 
 int main(){
     Home();
@@ -68,18 +85,18 @@ void gotoxy(int x, int y){
 
 void kursor(){
     char arah;
-    int x=2, y=3; // berfungsi untuk menggerakan kursor di void menu
+    int x=2, y=3;
 
     gotoxy(x,y);
     cout<<">";
 
     while(true){
         arah = getch();
-
+        
         switch(arah){
             case 'w':
                 if (y == 3){
-
+                  
                 }else{
                     gotoxy(x,y-=1);
                     printf(">");
@@ -89,10 +106,10 @@ void kursor(){
                 gotoxy(x,y);
                 printf(">");
                 break;
-
+             
             case 's': 
                 if (y == 4){
-
+                    
                 }else{
                     gotoxy(x, y+=1);
                     printf(">");
@@ -106,9 +123,9 @@ void kursor(){
                 if(y==3){
                     login();
                 }else{
-
+                    
                 }
-                    break;
+                break;
         }
     }
 }
@@ -127,36 +144,81 @@ void login(){
 
         switch(pass){
             case 2117051057:
-                admin();
+                admin(username);
                 break;
             case 211701009:
+                admin(username);
                 break;
             case 2117051028:
+                admin(username);
+                break;
+            default:
+                login();
                 break;
         }
+    }else{
+        pembeli(username);
     }
 }
 
-void admin(){
-    int pilih;
-    string nama;
+void header(){
+    cout<<"==================\n";
+    cout<<"| Daftar Obat    |\n";
+    cout<<"==================\n";
+}
+
+void admin(string name){
+    string med, pilih;
 
     do{
         menu.clear();
+        cout<<"| HELLO, " << name <<"|\n";
+        header();
         menu.cetak(menu.obat);
+        daftar();
+        cout<<"\nInputkan Pilihan (Push/Pop/exit): ";
         cin>>pilih;
 
-        switch (pilih){
-        case 1:
-            cin>>nama;
-            menu.Push(nama);
-            break;
+        if(pilih == "Push" || pilih == "push"){
+            cout<<"Masukkan Nama Obat: ";
+            cin.ignore(1,'\n');
+            getline(cin,med);
+            menu.Push(med);
+        
+        }else if(pilih == "Pop" || pilih == "pop"){
+            menu.Pop();
 
-        default:
-
-            break;
         }
 
-    }while(pilih != 4);
+    }while(pilih != "exit" && pilih != "Exit");
+    cin.ignore(1,'\n');
+    login();
+}
 
+void pembeli(string name){
+    string obat, pilih;
+
+    do{
+        menu.clear();
+        cout<<"| HELLO, " << name <<"|\n";
+        header();
+        menu.cetak(menu.obat);
+        daftar();
+        cout<<"Masukkan Pilihan(beli/batal/exit): ";
+        cin>> pilih;
+
+
+    }while(pilih != "exit");
+}
+
+void daftar(){
+    string obat[5] = {"Amoxillin", "Ampicillin", "Anankira","Amonium Klorida","Aminofilin"};
+
+    for(int i = 0; i < 5; i++){
+        cout<<obat[i] <<"\n";
+    }
+}
+
+int keluar(){
+    return 0;
 }
