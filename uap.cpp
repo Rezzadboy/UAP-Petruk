@@ -45,21 +45,37 @@ struct Tampilan{
         }
     }
 
-    void Enqueue(string namaobat){
-        if(data1 == jmlh){
-            cout<<"Penuh";
-
+    void Enqueue(string medic){
+        if(data1 = jmlh){
+            cout<<"Antrian Penuh";
+        
         }else{
-            data1++;
-            obat1.push(namaobat);
+            data1;
+            obat1.push(medic);
         }
-
     }
 
+    void Dequeue(){
+        if(!obat1.empty()){
+            data1--;
+            obat1.pop();
 
+        }else{
+            cout<<"Tidak ada Pembelian Obat";
+        }
+    }
+
+    void Print(queue<string> medkit){
+        while (!medkit.empty()){
+            cout<< medkit.front()<<"\n";
+            medkit.pop();
+        }
+        
+    }
 };
 
 Tampilan menu;
+
 void Home();
 void kursor();
 void gotoxy();
