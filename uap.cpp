@@ -46,11 +46,11 @@ struct Tampilan{
     }
 
     void Enqueue(string medic){
-        if(data1 = jmlh){
+        if(data1 == jmlh){
             cout<<"Antrian Penuh";
         
         }else{
-            data1;
+            data1++;
             obat1.push(medic);
         }
     }
@@ -75,7 +75,6 @@ struct Tampilan{
 };
 
 Tampilan menu;
-
 void Home();
 void kursor();
 void gotoxy();
@@ -84,6 +83,7 @@ void admin(string username);
 void pembeli(string name);
 void header();
 void daftar();
+void list_obat();
 int keluar();
 
 int main(){
@@ -169,7 +169,7 @@ void login(){
             case 2117051057:
                 admin(username);
                 break;
-            case 211701009:
+            case 2117051009:
                 admin(username);
                 break;
             case 2117051028:
@@ -227,17 +227,21 @@ void pembeli(string name){
         header();
         menu.cetak(menu.obat);
         daftar();
+        cout<<"\n";
+        list_obat();
         cout<<"Masukkan Pilihan(beli/batal/exit): ";
         cin>> pilih;
-        if (pilih == "beli")
-        {
-           cout << "masukkan obat yang anda pesan\n";
-           cin >> obat;
-           menu.Push(obat);
-        }
         
+        if(pilih == "beli" || pilih == "Beli"){
+            cout<<"Masukkan Nama Obat: ";
+            cin.ignore(1,'\n');
+            getline(cin, obat);
+            menu.Enqueue(obat);
 
+        }else if(pilih == "batal"){
+            menu.Dequeue();
 
+        }
     }while(pilih != "exit");
 }
 
@@ -247,6 +251,13 @@ void daftar(){
     for(int i = 0; i < 5; i++){
         cout<<obat[i] <<"\n";
     }
+}
+
+void list_obat(){
+    cout<<"=================\n";
+    cout<<"| Obat Anda     |\n";
+    cout<<"=================\n";
+    menu.Print(menu.obat1);
 }
 
 int keluar(){
