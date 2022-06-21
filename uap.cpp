@@ -77,14 +77,13 @@ struct Tampilan{
 Tampilan menu;
 void Home();
 void kursor();
-void gotoxy();
+void gotoxy(int, int);
 void login();
 void admin(string username);
 void pembeli(string name);
 void header();
 void daftar();
 void list_obat();
-int keluar();
 
 int main(){
     Home();
@@ -243,6 +242,7 @@ void pembeli(string name){
 
         }
     }while(pilih != "exit");
+    exit(0);
 }
 
 void daftar(){
@@ -258,8 +258,4 @@ void list_obat(){
     cout<<"| Obat Anda     |\n";
     cout<<"=================\n";
     menu.Print(menu.obat1);
-}
-
-int keluar(){
-    return 0;
 }
