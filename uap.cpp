@@ -145,7 +145,7 @@ void kursor(){
                 if(y==3){
                     login();
                 }else{
-                    
+                    exit(0);
                 }
                 break;
         }
